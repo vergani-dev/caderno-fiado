@@ -1,22 +1,20 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+import express from 'express';
+import cors from 'cors';
+import connectDatabase from '../backend/src/config/database';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// conexão com o Mongoouse
-mongoose
-  .connect("mongodb://localhost:27017/cadernoFiado")
-  .then(() => console.log("MongoDB conectado com sucesso!"))
-  .catch((err) => console.log(err));
+// conectar ao banco
+connectDatabase();
 
 // Rota teste
+app.get('/', (req, res) => res.send('API de Caderno de fiado funcionando'));
 
-app.get("/", (req, res) => res.send("API de Caderno de fiado funcionando"));
+app.get('/teste', (req, res) => res.send('<h1>Teste de rota')); // teste funcionando.
 
-app.get("/teste", (req, res) => res.send("Teste de rota"));
+app.get('/ping', (req, res) => res.json({ satus: 'OK' }));
 
 // Servidor
 const PORT = 5000;
