@@ -1,15 +1,19 @@
-import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-dotenv.config();
 
-// conexão com o Mongoouse
 const connectDatabase = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log('✅ MongoDB conectado com sucesso!');
+    // Aqui pega a variável após dotenv.config()
+    const uri = process.env.MONGO_URI;
+
+    console.log('🔍 Conectando ao MongoDB em:', uri);
+
+    if (!uri) throw new Error('MONGO_URI não definida no .env');
+
+    await mongoose.connect(uri);
+
+    console.log('✅ MongoDB conectado');
   } catch (error) {
     console.error('❌ Erro ao conectar no MongoDB:', error);
-    process.exit(1); // encerra o app se a conexão falhar
   }
 };
 
