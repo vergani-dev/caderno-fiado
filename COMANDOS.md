@@ -69,3 +69,5 @@ nano server.js
 
 
 ## Confirmar se o MongoDb esta rodando no Ubunto
+
+- mongod --version

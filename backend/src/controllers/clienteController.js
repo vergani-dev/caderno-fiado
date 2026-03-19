@@ -18,6 +18,7 @@ export const criarCliente = async (req, res) => {
     const cliente = await Cliente.create(req.body);
     res.status(201).json(cliente);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Erro ao criar cliente' });
   }
 };
@@ -27,8 +28,9 @@ export const criarCliente = async (req, res) => {
 export const listarCliente = async (req, res) => {
   try {
     const cliente = await Cliente.find();
-    res.status(201).json({ cliente });
+    res.status(200).json({ cliente });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Não foi possivél listar os clientes' });
   }
 };
@@ -47,6 +49,7 @@ export const atualizarClientes = async (req, res) => {
     }
     res.json(clienteAtualizado);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Erro ao atualizar o cliente' });
   }
 };
@@ -60,6 +63,7 @@ export const deletarCliente = async (req, res) => {
     }
     res.json({ message: 'Cliente removido com sucesso' });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Erro ao deletar cliente' });
   }
 };

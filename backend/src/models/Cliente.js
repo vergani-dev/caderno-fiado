@@ -7,7 +7,7 @@ const clienteSchema = new mongoose.Schema({
   },
 
   telefone: {
-    type: Number,
+    type: String,
     required: false, //Telefone para contato não obrigatorio
   },
   endereco: {
