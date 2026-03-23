@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/fiado', fiadoRoutes);
-app.use('/cliente', clienteRoutes);
+app.use('/clientes', clienteRoutes);
 
 export default app;
 export { connectDatabase }; // exporta para chamar depois

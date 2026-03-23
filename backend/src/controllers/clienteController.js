@@ -28,7 +28,7 @@ export const criarCliente = async (req, res) => {
 export const listarCliente = async (req, res) => {
   try {
     const cliente = await Cliente.find();
-    res.status(200).json({ cliente });
+    res.status(200).json(cliente);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Não foi possivél listar os clientes' });
