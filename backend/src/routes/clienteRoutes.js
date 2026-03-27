@@ -7,7 +7,11 @@ import {
   deletarCliente,
 } from '../controllers/clienteController.js';
 
+import { auth } from '../middlewares/authMiddleware.js';
+
 const router = express.Router();
+
+router.use(auth);
 
 router.post('/', criarCliente);
 router.get('/', listarCliente);
