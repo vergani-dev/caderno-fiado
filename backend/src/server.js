@@ -1,12 +1,22 @@
 import dotenv from 'dotenv';
-dotenv.config(); // garante que .env esteja carregado
+dotenv.config();
 
 import app, { connectDatabase } from './app.js';
 
+if (!process.env.MONGO_URI) {
+  console.error('❌ MONGO_URI não definido no .env');
+  process.exit(1);
+}
+
+if (!process.env.JWT_SECRET) {
+  console.error('❌ JWT_SECRET não definido no .env');
+  process.exit(1);
+}
+
 const PORT = process.env.PORT || 5000;
 
-console.log('🔍 URI recebida:', process.env.MONGO_URI);
+await connectDatabase();
 
-await connectDatabase(); // agora process.env.MONGO_URI existe
-
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+});

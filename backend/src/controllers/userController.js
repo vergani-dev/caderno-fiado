@@ -40,3 +40,37 @@ export const register = async (req, res) => {
     return res.status(500).json({ erro: 'Erro ao criar usuário' });
   }
 };
+export const login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    if (!email || !password) {
+      return res.status(400).json({ erro: 'Email e senha são obrigatórios' });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ erro: 'Usuário não encontrado' });
+    }
+
+    const senhaValida = await bcrypt.compare(password, user.password);
+
+    if (!senhaValida) {
+      return res.status(400).json({ erro: 'Senha inválida' });
+    }
+
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: '7d' }
+    );
+
+    res.json({
+      message: 'Login realizado com sucesso',
+      token,
+    });
+  } catch (error) {
+    return res.status(500).json({ erro: 'Erro no login' });
+  }
+};
