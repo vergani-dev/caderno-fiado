@@ -2,7 +2,7 @@ import express from 'express';
 
 import {
   criarCliente,
-  listarCliente,
+  Clientes,
   atualizarClientes,
   deletarCliente,
 } from '../controllers/clienteController.js';
@@ -14,8 +14,11 @@ const router = express.Router();
 router.use(auth);
 
 router.post('/', criarCliente);
-router.get('/', listarCliente);
+
+router.get('/', Clientes);
+
 router.put('/:id', atualizarClientes);
+
 router.delete('/:id', deletarCliente);
 
 export default router;

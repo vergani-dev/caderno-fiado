@@ -1,4 +1,4 @@
-import Cliente from '../models/Cliente.js';
+import Cliente from '../models/ClienteModel.js';
 
 // Criar um novo cliente
 export const criarCliente = async (req, res) => {
@@ -24,8 +24,7 @@ export const criarCliente = async (req, res) => {
 };
 
 //Listar todos os clientes
-
-export const listarCliente = async (req, res) => {
+export const Clientes = async (req, res) => {
   try {
     const cliente = await Cliente.find();
     res.status(200).json(cliente);
@@ -36,7 +35,6 @@ export const listarCliente = async (req, res) => {
 };
 
 // Atualizar um cliente
-
 export const atualizarClientes = async (req, res) => {
   const { id } = req.params;
 
